@@ -1,0 +1,58 @@
+@using Eplayers_AspNet_Luaninha.Models
+@model Equipe
+@{
+    ViewData["Title"] = "Jogadores";
+}
+
+
+<form class="cadastro" method="POST" action='@Url.Action("Cadastrar")'>
+
+    <div class="campo">
+    <label>Selecione sua equipe</label>
+    <select name="IdEquipe">
+     @foreach (Equipe equipe in ViewBag.novaListagemdaEquipe)
+     {
+         <option value="@equipe.IdEquipe"> @equipe.Nome</option>
+     }
+    </select>
+    </div>
+
+    <div class="campo">
+    <label>Nome</label>
+    <input type="text" name="Nome"/>
+    </div>
+
+    <div class="campo">
+        <label>Email</label>
+        <input type="email" name="Email" />
+    </div>
+
+     <div class="campo">
+        <label>Senha</label>
+        <input type="password" name="Senha" />
+    </div>
+
+    <button class="gradient btn" type="submit"> Cadastrar </button>
+</form>
+
+
+<table class="table table-striped table-responsive">
+    <thead>
+        <th>ID Jogador</th>
+        <th>ID Equipe</th>
+        <th>Nome</th>
+        <th>Email</th>
+    </thead>
+    <tbody>
+        @foreach (Jogador jogador in ViewBag.Jogadores)
+        {
+            <tr>
+                <td>@jogador.IdJogador</td>
+                <td>@jogador.IdEquipe</td>
+                <td>@jogador.Nome</td>
+                <td>@jogador.Email</td>
+                <td><a asp-area="Link para excluir um jogador" asp-controller="Jogador" asp-action="Excluir" asp-route-id="@jogador.IdJogador">Excluir</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
